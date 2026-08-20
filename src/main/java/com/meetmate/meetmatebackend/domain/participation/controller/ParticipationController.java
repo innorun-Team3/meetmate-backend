@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class ParticipationController {
 
-    public String test() {
-        log.info("test");
-        return  "ok";
-    }
+  public String test() {
+    log.info("test");
+    return "ok";
+  }
 }
