@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MeetMate Backend
 
 1주 MVP를 위한 Spring Boot REST API 초기 골격입니다.
