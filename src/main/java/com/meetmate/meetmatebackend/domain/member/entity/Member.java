@@ -11,7 +11,4 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "members")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends BaseTimeEntity {
-
-
-}
+public class Member extends BaseTimeEntity {}
