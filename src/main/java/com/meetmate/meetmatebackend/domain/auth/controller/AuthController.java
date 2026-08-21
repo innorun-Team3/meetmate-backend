@@ -26,6 +26,6 @@ public class AuthController {
   @PostMapping("/auth/signin")
   public ResponseEntity<ApiResponse<Void>> signin(@Valid @RequestBody SigninRequest request) {
     String jwt = authService.signin(request);
-    return ResponseEntity.ok().header("Authorization", "Bearer" + jwt).body(ApiResponse.success());
+    return ResponseEntity.ok().header("Authorization", "Bearer " + jwt).body(ApiResponse.success());
   }
 }

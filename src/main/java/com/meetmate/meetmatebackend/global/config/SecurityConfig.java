@@ -58,7 +58,7 @@ public class SecurityConfig {
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/auth/signup")
                     .permitAll()
-                    .requestMatchers(HttpMethod.GET, "/users")
+                    .requestMatchers(HttpMethod.GET, "/members")
                     .permitAll()
                     .anyRequest()
                     .authenticated())
