@@ -13,32 +13,31 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseTimeEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+  @Column(nullable = false, unique = true)
+  private String email;
 
-    @Column(nullable = false)
-    private String password;
+  @Column(nullable = false)
+  private String password;
 
-    @Column(nullable = false)
-    private String nickname;
+  @Column(nullable = false)
+  private String nickname;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Role role;
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  private Role role;
 
+  public Member(String email, String password, String nickname, Role role) {
+    this.email = email;
+    this.password = password;
+    this.nickname = nickname;
+    this.role = role;
+  }
 
-
-    public Member(String email, String password, String nickname, Role role) {
-        this.email = email;
-        this.password = password;
-        this.nickname = nickname;
-        this.role = role;
-    }
-
-    private Member(Long id) {this.id = id;}
-
-
+  private Member(Long id) {
+    this.id = id;
+  }
 }

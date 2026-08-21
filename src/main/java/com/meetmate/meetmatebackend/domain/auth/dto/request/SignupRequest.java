@@ -9,13 +9,16 @@ import lombok.Getter;
 @Getter
 public class SignupRequest {
 
-    @Email(message = "이메일 형식이 올바르지 않습니다")
-    private String email;
-    @NotBlank @Min(value = 8, message = "8자이상 입력하시오")
-    private String password;
-    @NotBlank @Max(value = 20, message = "20자 이상은 불가합니다")
-    private String nickname;
-    @NotBlank
-    private String role;
+  @Email(message = "이메일 형식이 올바르지 않습니다")
+  private String email;
 
+  @NotBlank
+  @Min(value = 8, message = "8자이상 입력하시오")
+  private String password;
+
+  @NotBlank
+  @Max(value = 20, message = "20자 이상은 불가합니다")
+  private String nickname;
+
+  @NotBlank private String role;
 }
