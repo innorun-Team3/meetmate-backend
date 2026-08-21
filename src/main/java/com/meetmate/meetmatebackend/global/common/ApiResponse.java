@@ -32,6 +32,10 @@ public class ApiResponse<T> {
     return new ApiResponse<>(true, SUCCESS_CODE, message, content);
   }
 
+  public static ApiResponse<Void> success() {
+    return new ApiResponse<>(true, SUCCESS_CODE, "Success", null);
+  }
+
   public static <T> ApiResponse<T> fail(String code, String message) {
     return new ApiResponse<>(false, code, message, null);
   }
