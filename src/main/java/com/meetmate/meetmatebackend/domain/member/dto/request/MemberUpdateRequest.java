@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 public class MemberUpdateRequest {
 
-    @NotBlank
-    private String oldPassword;
-    @NotBlank
-    @Size(min = 8, message = "8자 이상 입력하세요")
-    private String newPassword;
+  @NotBlank private String oldPassword;
+
+  @NotBlank
+  @Size(min = 8, message = "8자 이상 입력하세요")
+  private String newPassword;
 }

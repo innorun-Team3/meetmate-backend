@@ -6,6 +6,5 @@ import lombok.Getter;
 @Getter
 public class MemberDeleteRequest {
 
-    @NotBlank
-    private String password;
+  @NotBlank private String password;
 }

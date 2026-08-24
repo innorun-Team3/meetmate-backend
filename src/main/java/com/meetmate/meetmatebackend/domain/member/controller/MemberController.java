@@ -1,14 +1,13 @@
 package com.meetmate.meetmatebackend.domain.member.controller;
 
 import com.meetmate.meetmatebackend.domain.auth.dto.request.AuthUser;
-import com.meetmate.meetmatebackend.domain.member.dto.request.MemberUpdateRequest;
 import com.meetmate.meetmatebackend.domain.member.dto.request.MemberDeleteRequest;
+import com.meetmate.meetmatebackend.domain.member.dto.request.MemberUpdateRequest;
 import com.meetmate.meetmatebackend.domain.member.dto.response.MemberGetResponse;
 import com.meetmate.meetmatebackend.domain.member.service.MemberService;
 import com.meetmate.meetmatebackend.global.common.ApiResponse;
-import java.util.List;
-
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,18 +35,14 @@ public class MemberController {
 
   @GetMapping("/members/me/password")
   public ResponseEntity<ApiResponse<Void>> updatePassword(
-          @AuthenticationPrincipal AuthUser authUser,
-          @Valid @RequestBody MemberUpdateRequest request
-  ) {
+      @AuthenticationPrincipal AuthUser authUser, @Valid @RequestBody MemberUpdateRequest request) {
     memberService.updatePassword(authUser, request);
     return ResponseEntity.ok(ApiResponse.success());
   }
 
   @DeleteMapping("/members/me")
   public ResponseEntity<ApiResponse<Void>> deleteMe(
-          @AuthenticationPrincipal AuthUser authUser,
-          @Valid @RequestBody MemberDeleteRequest request
-  ) {
+      @AuthenticationPrincipal AuthUser authUser, @Valid @RequestBody MemberDeleteRequest request) {
     memberService.deleteMe(authUser, request);
     return ResponseEntity.ok(ApiResponse.success());
   }

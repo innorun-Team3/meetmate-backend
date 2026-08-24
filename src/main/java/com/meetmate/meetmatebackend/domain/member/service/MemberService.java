@@ -42,10 +42,11 @@ public class MemberService {
   }
 
   @Transactional
-  public void updatePassword(AuthUser authUser, MemberUpdateRequest request ) {
-    Member member = memberRepository.findById(authUser.getId()).orElseThrow(
-            () -> new PasswordNotMatchException()
-    );
+  public void updatePassword(AuthUser authUser, MemberUpdateRequest request) {
+    Member member =
+        memberRepository
+            .findById(authUser.getId())
+            .orElseThrow(() -> new PasswordNotMatchException());
 
     String oldEncdoedPassword = member.getPassword();
     String oldRawPassword = request.getOldPassword();
@@ -56,17 +57,17 @@ public class MemberService {
     }
 
     member.updatePassword(request.getNewPassword());
-
   }
 
   @Transactional
   public void deleteMe(AuthUser authUser, MemberDeleteRequest request) {
-    Member member = memberRepository.findById(authUser.getId()).orElseThrow(
-            () -> new MemberNotFoundException()
-    );
+    Member member =
+        memberRepository
+            .findById(authUser.getId())
+            .orElseThrow(() -> new MemberNotFoundException());
     String rawPassword = request.getPassword();
     String encodedPassword = member.getPassword();
-    boolean matches = passwordEncoder.matches(rawPassword,encodedPassword);
+    boolean matches = passwordEncoder.matches(rawPassword, encodedPassword);
 
     if (!matches) {
       throw new PasswordNotMatchException();
