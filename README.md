@@ -1,5 +1,101 @@
-<<<<<<< HEAD
-# MeetMate Backend
+# 🤝 MeetMate
+
+> 함께하고 싶은 사람들을 모집하고, 새로운 모임을 만들어가는 서비스
+
+<br>
+
+## 📌 프로젝트 소개
+
+MeetMate는 사용자가 원하는 모임을 생성하고 참여할 수 있는
+모임 모집 서비스입니다.
+
+사용자 인증 및 회원 관리를 기반으로
+모임 생성, 참여 등의 기능을 제공합니다.
+
+<br>
+
+## 🛠 Tech Stack
+
+### Backend
+
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.0-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=flat-square&logo=springsecurity&logoColor=white)
+![JPA](https://img.shields.io/badge/JPA-59666C?style=flat-square)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+
+### Development
+
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
+
+<br>
+
+## ✨ 주요 기능
+
+## ✨ 주요 기능
+
+### 👤 회원 관리
+
+> 회원의 가입부터 인증, 정보 관리 및 상태 관리를 제공합니다.
+
+- 🔐 회원가입 / 로그인
+- 👤 내 정보 조회
+- 👥 전체 회원 조회
+- 🔑 비밀번호 변경
+- 🗑️ Soft Delete 기반 회원 탈퇴
+- 🚦 회원 상태 관리 (`ACTIVE`, `SUSPENDED`, `DELETED`)
+- 🛡️ Role 기반 권한 관리 (`USER`, `ADMIN`)
+- 🎫 JWT Access Token 기반 인증
+
+
+### 📝 모임 관리
+
+> 사용자가 원하는 모임을 생성하고 관리할 수 있습니다.
+
+- 📌 모임 생성
+- 🔎 모임 목록 조회
+- 📖 모임 상세 조회
+- ✏️ 모임 수정
+- 🗑️ 모임 삭제
+- 👥 모집 인원 및 마감일 관리
+- 🚦 모집 상태 관리 (`RECRUITING`, `CLOSED`)
+
+
+### 🙋 모임 참가
+
+> 원하는 모임에 참가 신청하고 참가 상태를 관리할 수 있습니다.
+
+- 📩 모임 참가 신청
+- ✅ 참가 신청 승인
+- ❌ 참가 신청 거절
+- 🚫 참가 신청 취소
+- 📋 참가 신청 상태 조회
+- 🚦 참가 상태 관리 (`PENDING`, `APPROVED`, `REJECTED`, `CANCELLED`)
+
+<br>
+
+## 🏗 Architecture
+
+```text
+src/main/java
+└── com.meetmate.meetmatebackend
+    │
+    ├── domain
+    │   ├── auth
+    │   ├── member
+    │   ├── participation
+    │   └── meeting
+    │
+    └── global
+        ├── common
+        ├── error
+        ├── config
+        ├── health
+        └── entity
+        
+```
+
 
 1주 MVP를 위한 Spring Boot REST API 초기 골격입니다.
 
