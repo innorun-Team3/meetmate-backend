@@ -1,7 +1,9 @@
 package com.meetmate.meetmatebackend.domain.member.entity;
 
 import com.meetmate.meetmatebackend.domain.auth.dto.request.AuthUser;
+import com.meetmate.meetmatebackend.domain.member.enums.MemberStatus;
 import com.meetmate.meetmatebackend.domain.member.enums.Role;
+import com.meetmate.meetmatebackend.domain.member.exception.MemberNotValidateActiveException;
 import com.meetmate.meetmatebackend.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -31,11 +33,16 @@ public class Member extends BaseTimeEntity {
   @Enumerated(EnumType.STRING)
   private Role role;
 
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  private MemberStatus status;
+
   public Member(String email, String password, String nickname, Role role) {
     this.email = email;
     this.password = password;
     this.nickname = nickname;
     this.role = role;
+    this.status = MemberStatus.ACTIVE;
   }
 
   private Member(Long id) {
@@ -48,5 +55,25 @@ public class Member extends BaseTimeEntity {
 
   public void updatePassword(String password) {
     this.password = password;
+  }
+
+  // 활성화된 회원인지 확인하는 메서드
+  public void validateActive() {
+    if (this.status != MemberStatus.ACTIVE) {
+      throw new MemberNotValidateActiveException();
+    }
+  }
+
+  // 회원 상태 변경 메서드
+  public void suspend() {
+    this.status = MemberStatus.SUSPENDED;
+  }
+
+  public void activate() {
+    this.status = MemberStatus.ACTIVE;
+  }
+
+  public void delete() {
+    this.status = MemberStatus.DELETED;
   }
 }
