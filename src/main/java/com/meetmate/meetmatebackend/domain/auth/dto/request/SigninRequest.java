@@ -14,4 +14,6 @@ public class SigninRequest {
   @NotBlank
   @Size(min = 8, message = "8자이상 입력하시오")
   private String password;
+
+
 }

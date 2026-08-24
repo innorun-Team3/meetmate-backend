@@ -5,6 +5,7 @@ import com.meetmate.meetmatebackend.domain.member.dto.request.MemberDeleteReques
 import com.meetmate.meetmatebackend.domain.member.dto.request.MemberUpdateRequest;
 import com.meetmate.meetmatebackend.domain.member.dto.response.MemberGetResponse;
 import com.meetmate.meetmatebackend.domain.member.entity.Member;
+import com.meetmate.meetmatebackend.domain.member.enums.MemberStatus;
 import com.meetmate.meetmatebackend.domain.member.exception.MemberNotFoundException;
 import com.meetmate.meetmatebackend.domain.member.exception.PasswordNotMatchException;
 import com.meetmate.meetmatebackend.domain.member.repository.MemberRepository;
@@ -23,7 +24,7 @@ public class MemberService {
 
   @Transactional(readOnly = true)
   public List<MemberGetResponse> getAll() {
-    List<Member> members = memberRepository.findAll();
+    List<Member> members = memberRepository.findAllByStatusNot(MemberStatus.DELETED);
 
     return members.stream()
         .map(
@@ -35,7 +36,7 @@ public class MemberService {
 
   @Transactional(readOnly = true)
   public MemberGetResponse getOne(Long id) {
-    Member member = memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException());
+    Member member = memberRepository.findByIdAndStatusNot(id, MemberStatus.DELETED).orElseThrow(() -> new MemberNotFoundException());
 
     return new MemberGetResponse(
         member.getId(), member.getEmail(), member.getNickname(), member.getRole());
@@ -47,6 +48,8 @@ public class MemberService {
         memberRepository
             .findById(authUser.getId())
             .orElseThrow(() -> new PasswordNotMatchException());
+
+    member.validateActive();
 
     String oldEncdoedPassword = member.getPassword();
     String oldRawPassword = request.getOldPassword();
@@ -73,6 +76,6 @@ public class MemberService {
       throw new PasswordNotMatchException();
     }
 
-    memberRepository.deleteById(member.getId());
+    member.delete();
   }
 }

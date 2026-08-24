@@ -39,6 +39,8 @@ public class AuthService {
             .findByEmail(request.getEmail())
             .orElseThrow(() -> new EmailNotFoundException());
 
+    member.validateActive();
+
     String rawPassword = request.getPassword();
     String encodedPassword = member.getPassword();
 
