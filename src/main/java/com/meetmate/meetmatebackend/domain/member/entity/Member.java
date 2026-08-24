@@ -57,7 +57,7 @@ public class Member extends BaseTimeEntity {
     this.password = password;
   }
 
-  //활성화된 회원인지 확인하는 메서드
+  // 활성화된 회원인지 확인하는 메서드
   public void validateActive() {
     if (this.status != MemberStatus.ACTIVE) {
       throw new MemberNotValidateActiveException();

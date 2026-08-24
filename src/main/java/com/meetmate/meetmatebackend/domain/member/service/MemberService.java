@@ -36,7 +36,10 @@ public class MemberService {
 
   @Transactional(readOnly = true)
   public MemberGetResponse getOne(Long id) {
-    Member member = memberRepository.findByIdAndStatusNot(id, MemberStatus.DELETED).orElseThrow(() -> new MemberNotFoundException());
+    Member member =
+        memberRepository
+            .findByIdAndStatusNot(id, MemberStatus.DELETED)
+            .orElseThrow(() -> new MemberNotFoundException());
 
     return new MemberGetResponse(
         member.getId(), member.getEmail(), member.getNickname(), member.getRole());
