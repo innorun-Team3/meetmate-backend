@@ -18,9 +18,9 @@ public class AuthController {
   private final AuthService authService;
 
   @PostMapping("/auth/signup")
-  public ApiResponse<Void> signup(@Valid @RequestBody SignupRequest request) {
+  public ResponseEntity<ApiResponse<Void>> signup(@Valid @RequestBody SignupRequest request) {
     authService.signup(request);
-    return ApiResponse.success();
+    return ResponseEntity.ok(ApiResponse.success());
   }
 
   @PostMapping("/auth/signin")

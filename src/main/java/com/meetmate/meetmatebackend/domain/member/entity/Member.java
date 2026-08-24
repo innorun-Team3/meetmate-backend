@@ -1,5 +1,6 @@
 package com.meetmate.meetmatebackend.domain.member.entity;
 
+import com.meetmate.meetmatebackend.domain.auth.dto.request.AuthUser;
 import com.meetmate.meetmatebackend.domain.member.enums.Role;
 import com.meetmate.meetmatebackend.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -40,4 +41,10 @@ public class Member extends BaseTimeEntity {
   private Member(Long id) {
     this.id = id;
   }
+
+  public static Member fromAuthUser(AuthUser authUser) {
+    return new Member(authUser.getId());
+  }
+
+  public void updatePassword(String password) {this.password = password;}
 }
