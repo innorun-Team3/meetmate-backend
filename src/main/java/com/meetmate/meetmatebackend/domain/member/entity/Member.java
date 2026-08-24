@@ -1,8 +1,9 @@
 package com.meetmate.meetmatebackend.domain.member.entity;
 
+import com.meetmate.meetmatebackend.domain.auth.dto.request.AuthUser;
+import com.meetmate.meetmatebackend.domain.member.enums.Role;
 import com.meetmate.meetmatebackend.global.entity.BaseTimeEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,4 +12,41 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "members")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends BaseTimeEntity {}
+public class Member extends BaseTimeEntity {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(nullable = false, unique = true)
+  private String email;
+
+  @Column(nullable = false)
+  private String password;
+
+  @Column(nullable = false)
+  private String nickname;
+
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  private Role role;
+
+  public Member(String email, String password, String nickname, Role role) {
+    this.email = email;
+    this.password = password;
+    this.nickname = nickname;
+    this.role = role;
+  }
+
+  private Member(Long id) {
+    this.id = id;
+  }
+
+  public static Member fromAuthUser(AuthUser authUser) {
+    return new Member(authUser.getId());
+  }
+
+  public void updatePassword(String password) {
+    this.password = password;
+  }
+}

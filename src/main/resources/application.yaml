@@ -18,3 +18,5 @@ management:
     health:
       probes:
         enabled: true
+jwt:
+  secret: ${JWT_SECRET}

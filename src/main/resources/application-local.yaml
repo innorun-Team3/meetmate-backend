@@ -12,3 +12,6 @@ spring:
 logging:
   level:
     com.meetmate: debug
+
+jwt:
+  secret: ${JWT_SECRET}
