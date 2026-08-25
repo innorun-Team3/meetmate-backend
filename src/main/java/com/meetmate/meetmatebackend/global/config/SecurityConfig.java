@@ -60,6 +60,8 @@ public class SecurityConfig {
                     .permitAll()
                     .requestMatchers(HttpMethod.GET, "/members")
                     .permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/v1/health")
+                    .permitAll()
                     .anyRequest()
                     .authenticated())
         .addFilterBefore(jwtFilter, AnonymousAuthenticationFilter.class) // JwtFilter 등록

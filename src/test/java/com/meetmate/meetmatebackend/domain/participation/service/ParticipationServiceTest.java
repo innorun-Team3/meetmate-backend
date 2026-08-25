@@ -19,6 +19,7 @@ import com.meetmate.meetmatebackend.domain.participation.entity.Participation;
 import com.meetmate.meetmatebackend.domain.participation.entity.ParticipationStatus;
 import com.meetmate.meetmatebackend.domain.participation.exception.ParticipationCapacityExceededException;
 import com.meetmate.meetmatebackend.domain.participation.repository.ParticipationRepository;
+import jakarta.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,6 +36,7 @@ class ParticipationServiceTest {
   @Mock private ParticipationRepository participationRepository;
   @Mock private GatheringRepository gatheringRepository;
   @Mock private MemberRepository memberRepository;
+  @Mock private EntityManager entityManager;
 
   @InjectMocks private ParticipationService participationService;
 
@@ -89,8 +91,7 @@ class ParticipationServiceTest {
     Participation participation = new Participation(applicant, gathering);
     ReflectionTestUtils.setField(participation, "id", 20L);
 
-    when(gatheringRepository.findByIdForUpdate(gathering.getId()))
-        .thenReturn(Optional.of(gathering));
+    when(gatheringRepository.findById(gathering.getId())).thenReturn(Optional.of(gathering));
     when(participationRepository.findById(participation.getId()))
         .thenReturn(Optional.of(participation));
     when(participationRepository.countByGatheringIdAndStatus(
@@ -110,8 +111,7 @@ class ParticipationServiceTest {
     Participation participation = new Participation(applicant, gathering);
     ReflectionTestUtils.setField(participation, "id", 20L);
 
-    when(gatheringRepository.findByIdForUpdate(gathering.getId()))
-        .thenReturn(Optional.of(gathering));
+    when(gatheringRepository.findById(gathering.getId())).thenReturn(Optional.of(gathering));
     when(participationRepository.findById(participation.getId()))
         .thenReturn(Optional.of(participation));
     when(participationRepository.countByGatheringIdAndStatus(
