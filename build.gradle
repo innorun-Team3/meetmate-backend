@@ -52,6 +52,7 @@ tasks.named('test') {
 tasks.named('asciidoctor') {
 	inputs.dir snippetsDir
 	dependsOn tasks.named('test')
+	attributes 'snippets': snippetsDir.absolutePath
 	sources {
 		include 'index.adoc'
 	}
