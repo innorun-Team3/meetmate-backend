@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+reviews:
+  profile: "chill"
+  high_level_summary: true
+  review_status: true
+  request_changes_workflow: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+
+  pre_merge_checks:
+    title:
+      mode: "warning"
+      requirements: >
+        Use a concise Conventional Commit-style title:
+        feat, fix, refactor, test, docs, chore, or ci,
+        followed by a description that matches the actual code change.
+
+    description:
+      mode: "warning"
+
+    issue_assessment:
+      mode: "warning"
+
+  path_instructions:
+    - path: "src/main/java/**/controller/**"
+      instructions: |
+        Review request validation, HTTP status codes, error responses,
+        authorization requirements, and exposure of internal entities.
+
+    - path: "src/main/java/**/service/**"
+      instructions: |
+        Review business rules, transaction boundaries, null handling,
+        duplicate participation prevention, and meeting-capacity race conditions.
+
+    - path: "src/main/java/**/entity/**"
+      instructions: |
+        Check JPA relationship ownership, lazy loading, cascade settings,
+        database constraints, and accidental EAGER fetching.
+
+    - path: "src/test/**"
+      instructions: |
+        Check that test names describe behavior and that validation,
+        failure paths, and boundary cases are covered.
+
+chat:
+  auto_reply: true

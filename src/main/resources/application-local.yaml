@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/meetmate?serverTimezone=Asia/Seoul&characterEncoding=utf8
+    username: meetmate
+    password: meetmate
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+logging:
+  level:
+    com.meetmate: debug
+
+jwt:
+  secret: ${JWT_SECRET}
