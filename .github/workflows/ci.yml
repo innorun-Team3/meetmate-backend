@@ -1,4 +1,4 @@
-name: Spotless Check
+name: CI Check
 
 on:
   issues:
