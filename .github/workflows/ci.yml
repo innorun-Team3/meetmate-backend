@@ -32,6 +32,7 @@ jobs:
 
   get-keyword:
     runs-on: ubuntu-latest
+    if: github.event_name == 'issues'
     outputs:
       level: ${{ steps.get-keyword.outputs.level }}
     steps:
