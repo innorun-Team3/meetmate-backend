@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   spotless-check:
+    if: github.event_name == 'pull_request'
     name: Check code formatting
     runs-on: ubuntu-latest
 
@@ -84,3 +85,44 @@ jobs:
                 }
               ]
             }
+
+  set-environment:
+    if: github.event.pull_request.merged == true || github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.set-env.outputs.environment }}
+    steps:
+      - name: set env
+        id: set-env
+        run: |
+          if [[ ${{ github.ref_type }} == "tag" ]]; then
+            echo "environment=qa" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          if [[ ${{ github.ref_type }} == "branch" ]]; then
+            echo "environment=dev" >> $GITHUB_OUTPUT
+            if [[ ${{ github.base_ref }} == "main" ]]; then
+              echo "environment=prod" >> $GITHUB_OUTPUT 
+            fi
+          fi
+      - name: check env
+        run: echo ${{ steps.set-env.outputs.environment }}
+  create-pr:
+    if: needs.set-environment.outputs.environment == 'qa'
+    runs-on: ubuntu-latest
+    needs: [ set-environment ]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+      - name: gh auth login
+        run: |
+          echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} | gh auth login --with-token
+      - name: create branch
+        run: |
+          git checkout -b release/${{ github.ref_name }}
+          git push origin release/${{ github.ref_name }}
+      - name: create pr
+        run: |
+          gh pr create --base main --head release/${{ github.ref_name }} --title "release/${{ github.ref_name }} -> main" --body "release pr"
+
