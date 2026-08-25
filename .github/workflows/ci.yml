@@ -10,8 +10,6 @@ on:
     types: [opened, synchronize, closed]
     branches: [dev, main]
 
-permissions:
-  contents: read
 
 jobs:
   spotless-check:
